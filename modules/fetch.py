@@ -1,13 +1,20 @@
-from willie import module
+import willie.module
 import re
 
-@module.commands('throw')
-@module.commands('fetch')
-@module.rule('throw?')
-@module.rule('fetch?')
+count = 0		#get tired after some time
+
+@willie.module.commands('throw')
+@willie.module.commands('fetch')
+@willie.module.rule('throw?')
+@willie.module.rule('fetch?')
 def throwcommand(bot, trigger):
-	words = re.split(' ' , trigger)
-	del words[0]
-	a = ' '.join(words)
-	bot.say(bot.nick + ' chases after ' + a)
-	
+	global count
+	if count == 3:
+		bot.action('Tired')
+		count = 0	
+	else:
+		words = re.split(' ' , trigger)
+		del words[0]
+		joined_words = ' '.join(words)
+		bot.action(' chases after ' + joined_words)
+		count = count + 1
