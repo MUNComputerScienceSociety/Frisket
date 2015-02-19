@@ -1,44 +1,23 @@
 import willie.module
 import re
 from random import randint
-
-count = randint(2,5)		#get tired after some time (randomized)
+from willie.formatting import bold
 
 @willie.module.commands('throw')
 @willie.module.commands('fetch')
-def throwcommand(bot, trigger):	
-    global count
-
-    x = randint(0,4)        #inclusive
+def fetch(bot, trigger):	
+    """
+    Fetch command
+    """
+    x = randint(0,9) #inclusive
     words = re.split(' ' , trigger)
     del words[0]
     joined_words = ' '.join(words)
 
-    if count == 0:
-        bot.action('Tired')
-        Tired(bot, trigger)
-    elif(x < 3):
+    if(x < 5):
+        bot.action('fetches ' + joined_words + ' for ' + bold(trigger.nick))
+    elif(x >= 5 and x < 9):
         bot.action('chases after ' + joined_words)
-        count -= 1
-    elif (x == 3):
-        Rest(bot, trigger)
-    elif (x == 4):
+    elif (x == 9):
         bot.action('didn\'t see the ' + joined_words + ', chases squirrel instead')
-        count -= 1
 
-def Tired(bot, trigger):
-    global count
-    bot.action('Sleepy')
-    Rest(bot, trigger)
-    count = randint(2,5)
-
-@willie.module.rule('rest')
-@willie.module.rule('sleep')
-def Rest(bot, trigger):
-    global count
-    bot.action('zzzzzzzzzz!!!!')
-    count = randint(2,5)
-
-@willie.module.rule('pets')
-def Pets(bot, trigger):
-    bot.action('woooof wooooof')
