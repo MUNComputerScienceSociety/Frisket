@@ -6,8 +6,6 @@ count = randint(2,5)		#get tired after some time (randomized)
 
 @willie.module.commands('throw')
 @willie.module.commands('fetch')
-@willie.module.rule('throw?')
-@willie.module.rule('fetch?')
 def throwcommand(bot, trigger):	
     global count
 
