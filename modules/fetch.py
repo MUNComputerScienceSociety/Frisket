@@ -9,15 +9,15 @@ def fetch(bot, trigger):
     """
     Fetch command
     """
-    x = randint(0,9) #inclusive
+    x = randint(0,10) #inclusive
     words = re.split(' ' , trigger)
     del words[0]
     joined_words = ' '.join(words)
 
     if(x < 5):
-        bot.action('fetches ' + joined_words + ' for ' + bold(trigger.nick))
-    elif(x >= 5 and x < 9):
-        bot.action('chases after ' + joined_words)
-    elif (x == 9):
-        bot.action('didn\'t see the ' + joined_words + ', chases squirrel instead')
+        bot.action('fetches the ' + joined_words + ' for ' + bold(trigger.nick))
+    elif(x >= 5 and x < 10):
+        bot.action('brings the ' + joined_words + ' back to ' + bold(trigger.nick))
+    elif (x == 10):
+        bot.action('ignores ' + bold(trigger.nick) + ' and chases a squirrel instead')
 
