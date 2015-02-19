@@ -15,9 +15,9 @@ def fetch(bot, trigger):
     joined_words = ' '.join(words)
 
     if(x < 5):
-        bot.action('fetches the ' + joined_words + ' for ' + bold(trigger.nick))
+        bot.action('fetches the ' + bold(joined_words) + ' for ' + trigger.nick)
     elif(x >= 5 and x < 10):
-        bot.action('brings the ' + joined_words + ' back to ' + bold(trigger.nick))
+        bot.action('brings the ' + bold(joined_words) + ' back to ' + trigger.nick)
     elif (x == 10):
-        bot.action('ignores ' + bold(trigger.nick) + ' and chases a squirrel instead')
+        bot.action('ignores ' + trigger.nick + ' and chases a squirrel instead')
 
