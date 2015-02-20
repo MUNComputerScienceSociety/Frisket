@@ -1,6 +1,5 @@
 import willie.module
 from random import randint
-from willie.formatting import bold
 
 @willie.module.commands('pet')
 def pet(bot, trigger):	
