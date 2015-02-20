@@ -7,7 +7,7 @@ from willie.formatting import bold
 @willie.module.commands('fetch')
 def fetch(bot, trigger):	
     """
-    Fetch command
+    fetch [object] - tells Frisket to fetch the object
     """
     x = randint(0,10) #inclusive
     words = re.split(' ' , trigger)

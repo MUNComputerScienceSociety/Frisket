@@ -4,7 +4,7 @@ from random import randint
 @willie.module.commands('pet')
 def pet(bot, trigger):	
     """
-    Pet command
+    pet - Pets Frisket
     """
     x = randint(0,1) #inclusive
 
