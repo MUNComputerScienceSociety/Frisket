@@ -13,8 +13,22 @@ import willie.module
 
 #TODO: set in 'configure' function
 command_prefix = '!'
+game_channels = ['#muncs-games', '#mainframe']
 
-@willie.module.rule('^' + command_prefix + '.*')
+@willie.module.require_chanmsg(message="This command only works in channels")
+@willie.module.rule('^' + command_prefix + 'game\s(\w*)')
 def start_game(bot, trigger):
-    pass
-
+    if not trigger.sender in game_channels:
+        bot.reply("Games are not allowed in this channel")
+        return
+    
+    if trigger.sender in bot.memory and 'current_game' in bot.memory[trigger.sender]:
+        bot.reply("Cannot start game; already one running: " + bot.memory[trigger.sender])
+        return
+    
+    bot.say(bold('WARNING:') + " Incoming game")
+    bot.say("Starting " + trigger.group(1))
+    
+    bot.memory[trigger.sender] = {'current_game': trigger.group(1)}
+    
+    return
