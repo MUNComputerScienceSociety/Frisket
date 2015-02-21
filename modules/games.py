@@ -16,15 +16,17 @@ from willie.formatting import bold
 command_prefix = '!'
 game_channels = ['#muncs-games', '#mainframe']
 
-@willie.module.require_chanmsg("This command only works in channels")
+
 @willie.module.rule('^' + command_prefix + 'game\s(\w*)')
 def start_game(bot, trigger):
-    if not trigger.sender in game_channels:
+    if trigger.is_privmsg:
+        bot.reply("This command only works in channels")
+        return
+    elif not trigger.sender in game_channels:
         bot.reply("Games are not allowed in this channel")
         return
-    
-    if trigger.sender in bot.memory and 'current_game' in bot.memory[trigger.sender]:
-        bot.reply("Cannot start game; already one running: " + bot.memory[trigger.sender])
+    elif trigger.sender in bot.memory and 'current_game' in bot.memory[trigger.sender]:
+        bot.reply("Cannot start game; already one running: " + bot.memory[trigger.sender]['current_game'])
         return
     
     bot.say(bold('WARNING:') + " Incoming game")
