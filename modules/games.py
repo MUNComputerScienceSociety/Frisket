@@ -10,12 +10,13 @@ from __future__ import unicode_literals
 from __future__ import print_function
 
 import willie.module
+from willie.formatting import bold
 
 #TODO: set in 'configure' function
 command_prefix = '!'
 game_channels = ['#muncs-games', '#mainframe']
 
-@willie.module.require_chanmsg(message="This command only works in channels")
+@willie.module.require_chanmsg("This command only works in channels")
 @willie.module.rule('^' + command_prefix + 'game\s(\w*)')
 def start_game(bot, trigger):
     if not trigger.sender in game_channels:
