@@ -17,7 +17,7 @@ command_prefix = '!'
 game_channels = ['#muncs-games', '#mainframe', '#gamecube']
 
 
-@willie.module.rule('^' + command_prefix + 'game\s(\w*)')
+@willie.module.rule('^' + command_prefix + 'start\s(\w*)')
 def start_game(bot, trigger):
     if trigger.is_privmsg:
         bot.reply("This command only works in channels")
@@ -36,5 +36,20 @@ def start_game(bot, trigger):
         bot.memory['game'] = {}
     
     bot.memory['game'][trigger.sender] = {'current_game': trigger.group(1)}
+    
+    return
+
+@willie.module.rule('^' + command_prefix + 'end')
+def end_game(bot, trigger):
+    if trigger.is_privmsg:
+        bot.reply("This command only works in channels")
+        return
+    elif not 'game' in bot.memory or not trigger.sender in bot.memory['game'] or not 'current_game' in bot.memory['game'][trigger.sender]:
+        bot.reply("There is no current game to end")
+        return
+    
+    bot.say("Game over")
+    
+    del bot.memory['game'][trigger.sender]['current_game']
     
     return
