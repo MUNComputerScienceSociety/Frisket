@@ -2,6 +2,7 @@
 import willie.module
 import willie.web
 import json
+from willie.formatting import bold
 
 @willie.module.commands('munweather')
 def munweather(bot, trigger):	
@@ -15,10 +16,13 @@ def munweather(bot, trigger):
     # parse json into a python dict
     data = json.loads(willie.web.get(url))
     # get string description and current temperature in Celsius
-    description = data['weather'][0]['main']
+    description = data['weather'][0]['description']
     temp = data['main']['temp'] - 273.15
+    # get humidity and wind speed in km/h
+    humidity = data['main']['humidity']
+    windspeed = data['wind']['speed'] * 3.6
 
-    answer = "The current weather is {}! It is {:.1}\N{DEGREE SIGN}C ".format(description,
+    answer = "The current weather is {}! It is {:.1f}\N{DEGREE SIGN}C ".format(description,
             temp)
     if(temp < -5):
         answer += "cold! Brrr!"
@@ -31,4 +35,8 @@ def munweather(bot, trigger):
     else:
         answer += " hot!"
 
+    answer2 = "The humidity is {}% and the wind speed is {:.1f} km/h.".format(humidity, windspeed) 
+
     bot.say(answer)
+    bot.say(answer2)
+    bot.say(bold("Woof!")) 
