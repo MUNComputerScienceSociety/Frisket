@@ -17,7 +17,7 @@ command_prefix = '!'
 game_channels = ['#muncs-games', '#mainframe', '#gamecube']
 
 
-@willie.module.rule('^' + command_prefix + 'start\s(\w*)')
+@willie.module.rule('^' + command_prefix + 'start\s(\w+)')
 def start_game(bot, trigger):
     if trigger.is_privmsg:
         bot.reply("This command only works in channels")
