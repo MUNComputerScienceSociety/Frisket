@@ -8,10 +8,8 @@ def sniffbutt(bot, trigger):
     """
     x = randint(0,10) #inclusive
 
-    str = 'sniffs {}\'s butt.'.format(trigger.nick)
+    bot.action('sniffs {}\'s butt.'.format(trigger.nick))
     if(x < 7):
-        str += ' Smells like a friendly butt! Woof!'
+        bot.say('Smells like a friendly butt! Woof!')
     elif(x >= 8 and x <= 10):
-        str += ' Smells bad! You\'re not a friend of mine! Angry Woof!'
-
-    bot.action(str)
+        bot.say('Smells bad! You\'re not a friend of mine! Angry Woof!')
