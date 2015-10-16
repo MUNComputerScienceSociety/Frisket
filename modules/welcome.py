@@ -8,7 +8,7 @@ So that the bot says "you're welcome" when thanked
 from __future__ import unicode_literals
 
 import random
-from sopel.module import rule
+from willie.module import rule
 
 @rule(r'(?i)(thanks( a lot)?|thank you),? $nickname[ \t]*$')
 def yourewelcome(bot, trigger):
